@@ -22,15 +22,28 @@ class App extends Component {
     this.setState(() => ({ contacts: newContacts, filter: '' }));
   };
 
-  addContact = ({ id, name, number }) =>
+  addContact = ({ id, name, number }) => {
     this.setState(prevstate => ({
       contacts: [...prevstate.contacts, { id, name, number }],
       filter: '',
     }));
+  };
 
   handleChange = event => {
     this.setState({ filter: event.target.value });
   };
+
+  componentDidMount() {
+    const arr = JSON.parse(localStorage.getItem('contacts'));
+    if (arr?.length) {
+      this.setState({ contacts: arr });
+    }
+  }
+
+  componentDidUpdate() {
+    // console.log('Hallo!');
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  }
 
   render() {
     return (
