@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 import InputElement from './InputElement';
 import Button from '../Button';
@@ -12,9 +12,6 @@ class ContactForm extends Component {
     name: '',
     number: '',
   };
-
-  isContactExist = name =>
-    !!this.props.contacts.find(contact => contact.name.toUpperCase().includes(name.toUpperCase()));
 
   resetFormState = () =>
     this.setState({
@@ -31,15 +28,7 @@ class ContactForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
-    if (this.isContactExist(this.state.name)) {
-      alert(`${this.state.name} is already in contacts!`);
-
-      this.resetFormState();
-      return;
-    }
-
-    this.props.onFormSubmit({ ...this.state, id: nanoid() });
+    this.props.onFormSubmit(this.state.name, this.state.number);
     this.resetFormState();
   };
 
