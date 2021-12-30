@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
-// import { nanoid } from 'nanoid';
 
 import InputElement from './InputElement';
 import Button from '../Button';
@@ -13,11 +12,12 @@ class ContactForm extends Component {
     number: '',
   };
 
-  resetFormState = () =>
+  resetFormState() {
     this.setState({
       name: '',
       number: '',
     });
+  }
 
   handleChange = event => {
     const key = event.target.name;
